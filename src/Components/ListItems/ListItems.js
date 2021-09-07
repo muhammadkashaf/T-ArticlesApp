@@ -28,50 +28,51 @@ const useStyles = makeStyles((theme) => ({
 export default function ListItems() {
     const classes = useStyles();
     const { response } = useArticles();
-
     return (
         <List className={classes.root}>
-            {response && response.map(({ media, abstract, byline, title, updated, id }) => (
-                <Fragment key={id}>
-                    <ListItem alignItems="flex-start">
-                        <ListItemAvatar>
-                            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg"/>
-                        </ListItemAvatar>
-                        <ListItemText
-                            primary={title}
-                            secondary={
-                                <React.Fragment>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        className={classes.inline}
-                                        color="textPrimary"
-                                    >
-                                        {abstract}
-                                    </Typography>
-
-                                    <div className={classes.row}>
+            {response && response.map(({ media, abstract, byline, title, updated, id }) => {
+                return (
+                    <Fragment key={id}>
+                        <ListItem alignItems="flex-start">
+                            <ListItemAvatar>
+                                <Avatar alt="Remy Sharp" src={media.length ? media[0]['media-metadata'][0].url : null} />
+                            </ListItemAvatar>
+                            <ListItemText
+                                primary={title}
+                                secondary={
+                                    <React.Fragment>
                                         <Typography
                                             component="span"
                                             variant="body2"
-                                            color="textPrimary">
-                                            {byline}
+                                            className={classes.inline}
+                                            color="textPrimary"
+                                        >
+                                            {abstract}
                                         </Typography>
-                                        <Typography
-                                            component="span"
-                                            variant="body2"
-                                            color="textPrimary">
-                                            {updated}
-                                        </Typography>
-                                    </div>
-                                </React.Fragment>
-                            }
-                        />
-                    </ListItem>
 
-                    <Divider variant="inset" component="li" />
-                </Fragment>
-            ))}
+                                        <div className={classes.row}>
+                                            <Typography
+                                                component="span"
+                                                variant="body2"
+                                                color="textPrimary">
+                                                {byline}
+                                            </Typography>
+                                            <Typography
+                                                component="span"
+                                                variant="body2"
+                                                color="textPrimary">
+                                                {updated}
+                                            </Typography>
+                                        </div>
+                                    </React.Fragment>
+                                }
+                            />
+                        </ListItem>
+
+                        <Divider variant="inset" component="li" />
+                    </Fragment>
+                )
+            })}
         </List>
     );
 }

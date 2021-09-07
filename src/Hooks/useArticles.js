@@ -4,7 +4,7 @@ import axios from 'axios';
 axios.defaults.baseURL = 'https://api.nytimes.com';
 
 const useArticles = () => {
-    const [response, setResponse] = useState();
+    const [response, setResponse] = useState(null);
     const [error, setError] = useState('');
     const [loading, setloading] = useState(true);
 
